@@ -1,4 +1,5 @@
 import sys
+
 def calculate_grade(avg):
     """Return grade based on average marks"""
     if 90 <= avg <= 100:
@@ -13,6 +14,7 @@ def calculate_grade(avg):
         return "D"
     else:
         return "F"
+
 def get_student_result(name, dept, semester, m1, m2, m3):
     """Return formatted student result"""
     avg = (m1 + m2 + m3) / 3
@@ -22,12 +24,13 @@ def get_student_result(name, dept, semester, m1, m2, m3):
         f"Name: {name}, Department: {dept}, Semester: {semester}, "
         f"Average: {avg:.2f}, Grade: {grade}"
     )
+
 if __name__ == "__main__":
     print("=== Student Result Program ===")
 
     try:
         # Case 1: Jenkins / CLI arguments
-        if len(sys.argv) == 8:
+        if len(sys.argv) == 7:  # 0=script, 1=name, 2=dept, 3=semester, 4,5,6=marks
             name = sys.argv[1]
             dept = sys.argv[2]
             semester = sys.argv[3]
@@ -35,20 +38,23 @@ if __name__ == "__main__":
             m2 = int(sys.argv[5])
             m3 = int(sys.argv[6])
         else:
-            # Case 2: Manual input
+            # Case 2: Manual input (for local testing)
             name = input("Enter Student Name: ")
             dept = input("Enter Department: ")
             semester = input("Enter Semester: ")
             m1 = int(input("Enter Subject 1 Marks: "))
             m2 = int(input("Enter Subject 2 Marks: "))
             m3 = int(input("Enter Subject 3 Marks: "))
+
         print("\n=== Entered Student Details ===")
         print("Name:", name)
         print("Department:", dept)
         print("Semester:", semester)
         print("Marks:", m1, m2, m3)
+
         result = get_student_result(name, dept, semester, m1, m2, m3)
         print("\nFinal Result:")
         print(result)
+
     except ValueError:
         print("Invalid input! Please enter numeric marks.")
